@@ -1,0 +1,27 @@
+.home-container {
+  min-height: 100vh;
+}
+.category-slider-list-container {
+  box-shadow: 0px 1px 5px #d3d3d3;
+}
+.category-slider-List {
+  padding-left: 0px;
+  display: flex;
+  width: 100%;
+  overflow-y: auto;
+  margin: 0px;
+}
+.dish-list-container {
+  margin: 0px;
+}
+.dish-list {
+  margin: 0px;
+  padding: 10px;
+}
+.loader-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

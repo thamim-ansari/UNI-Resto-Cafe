@@ -1,0 +1,87 @@
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 1px 5px #d3d3d3;
+}
+.nav-responsive-container {
+  width: 90%;
+  font-family: 'Roboto';
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0px;
+}
+@media screen and (min-width: 768px) {
+  .nav-responsive-container {
+    width: 95%;
+  }
+}
+.app-logo {
+  font-family: 'Roboto';
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0px;
+}
+@media screen and (min-width: 768px) {
+  .app-logo {
+    font-size: 28px;
+  }
+}
+.my-orders-container {
+  display: flex;
+  align-items: center;
+}
+.my-orders {
+  font-family: 'Roboto';
+  font-weight: 600;
+  color: #555555;
+  font-size: 17px;
+  margin-right: 5px;
+}
+@media screen and (max-width: 768px) {
+  .my-orders {
+    display: none;
+  }
+}
+.cart-icon-container {
+  font-family: 'Roboto';
+  display: flex;
+}
+.cart-icon {
+  font-size: 25px;
+}
+@media screen and (min-width: 768px) {
+  .cart-icon {
+    font-size: 30px;
+  }
+}
+.order-qty-container {
+  background-color: #ff4433;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+@media screen and (min-width: 768px) {
+  .order-qty-container {
+    top: 18px;
+    right: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .order-qty-container {
+    right: 30px;
+  }
+}
+.order-qty {
+  color: #ffffff;
+  font-size: 12px;
+}
