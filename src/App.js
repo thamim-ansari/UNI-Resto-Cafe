@@ -1,6 +1,11 @@
 import {useState} from 'react'
+import {Switch, Route} from 'react-router-dom'
+
 import Home from './pages/Home'
+import Login from './pages/Login'
 import OrderContext from './context/OrderContext'
+import ProtectedRoute from './components/ProtectedRoute'
+
 import './App.css'
 
 const App = () => {
@@ -50,7 +55,10 @@ const App = () => {
         decrementOrderItemQuantity: onDecrementOrderItemQuantity,
       }}
     >
-      <Home />
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <ProtectedRoute exact path="/" component={Home} />
+      </Switch>
     </OrderContext.Provider>
   )
 }

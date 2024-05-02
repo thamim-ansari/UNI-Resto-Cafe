@@ -65,23 +65,27 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 5px;
+  position: relative;
+  top: -6px;
   right: 10px;
-}
-@media screen and (min-width: 768px) {
-  .order-qty-container {
-    top: 18px;
-    right: 16px;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .order-qty-container {
-    right: 30px;
-  }
 }
 .order-qty {
   color: #ffffff;
   font-size: 12px;
+}
+.logout-and-cart-container {
+  display: flex;
+  align-items: center;
+}
+.logout-btn {
+  color: #fff;
+  background-color: #ff4433;
+  font-family: 'Roboto';
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
