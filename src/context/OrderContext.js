@@ -1,9 +1,12 @@
 import React from 'react'
 
 const OrderContext = React.createContext({
-  orderList: [],
-  incrementOrderItemQuantity: () => {},
-  decrementOrderItemQuantity: () => {},
+  cartList: [],
+  removeAllCartItems: () => {},
+  addCartItem: () => {},
+  removeCartItem: () => {},
+  incrementCartItemQuantity: () => {},
+  decrementCartItemQuantity: () => {},
 })
 
 export default OrderContext

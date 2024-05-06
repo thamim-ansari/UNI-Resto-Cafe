@@ -1,10 +1,9 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import Loader from 'react-loader-spinner'
 
 import Header from '../../components/Header'
 import CategorySliderItem from '../../components/CategorySliderItem'
 import FoodList from '../../components/FoodList'
-import OrderContext from '../../context/OrderContext'
 
 import './index.css'
 
@@ -16,15 +15,11 @@ const apiStatusConstants = {
 
 const Home = () => {
   const [restaurantData, setRestaurantData] = useState([])
-  const [restaurantName, setRestaurantName] = useState('')
   const [restaurantApiStatus, setApiStatus] = useState(
     apiStatusConstants.initial,
   )
   const [activeTabId, setActiveTabId] = useState(0)
   const [activeFoodList, setActiveFoodList] = useState([])
-  const {incrementOrderItemQuantity, decrementOrderItemQuantity} = useContext(
-    OrderContext,
-  )
 
   const getFormattedData = data => ({
     categoryDishes: data.category_dishes.map(eachCategoryDishes => ({
@@ -70,14 +65,12 @@ const Home = () => {
       const restaurantApiResponse = await fetch(restaurantApiUrl)
       if (restaurantApiResponse.ok) {
         const fetchedRestaurantData = await restaurantApiResponse.json()
-        const resName = fetchedRestaurantData.map(
-          eachItem => eachItem.restaurant_name,
-        )
+
         const formattedRestaurantData = fetchedRestaurantData[0].table_menu_list.map(
           eachItem => getFormattedData(eachItem),
         )
         setRestaurantData(formattedRestaurantData)
-        setRestaurantName(resName)
+
         setApiStatus(apiStatusConstants.success)
       }
     }
@@ -100,24 +93,6 @@ const Home = () => {
 
   const onChangeActiveTab = id => setActiveTabId(id)
 
-  const onClickIncreaseOrderQty = id => {
-    const activeTabListData = restaurantData.filter(
-      eachItem => eachItem.menuCategoryId === activeTabId,
-    )
-    const selectedDish = activeTabListData[0].categoryDishes.find(
-      dish => dish.dishId === id,
-    )
-    incrementOrderItemQuantity(selectedDish)
-  }
-  const onClickDecreaseOrderQty = id => {
-    const activeTabListData = restaurantData.filter(
-      eachItem => eachItem.menuCategoryId === activeTabId,
-    )
-    const selectedDish = activeTabListData[0].categoryDishes.find(
-      dish => dish.dishId === id,
-    )
-    decrementOrderItemQuantity(selectedDish)
-  }
   const renderCategorySlider = () => (
     <div className="category-slider-list-container">
       <ul className="category-slider-List">
@@ -137,12 +112,7 @@ const Home = () => {
       <ul className="dish-list">
         {activeFoodList.map(category =>
           category.categoryDishes.map(foodItem => (
-            <FoodList
-              key={foodItem.dishId}
-              foodDetails={foodItem}
-              onClickIncreaseOrderQty={onClickIncreaseOrderQty}
-              onClickDecreaseOrderQty={onClickDecreaseOrderQty}
-            />
+            <FoodList key={foodItem.dishId} foodDetails={foodItem} />
           )),
         )}
       </ul>
@@ -150,7 +120,7 @@ const Home = () => {
   )
   const renderRestaurantAppContainer = () => (
     <>
-      <Header restaurantName={restaurantName} />
+      <Header />
       {renderCategorySlider()}
       {renderDishListContainer()}
     </>

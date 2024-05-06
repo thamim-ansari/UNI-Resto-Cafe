@@ -1,9 +1,9 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useContext} from 'react'
 import OrderContext from '../../context/OrderContext'
 import './index.css'
 
 const FoodList = props => {
-  const {foodDetails, onClickIncreaseOrderQty, onClickDecreaseOrderQty} = props
+  const {foodDetails} = props
   const {
     dishId,
     dishImage,
@@ -16,34 +16,25 @@ const FoodList = props => {
     dishType,
     dishAvailability,
   } = foodDetails
-  const {orderList} = useContext(OrderContext)
-  const [qty, setQty] = useState(() => {
-    const orderItem = orderList.find(item => item.dishId === dishId)
-    return orderItem ? orderItem.qty : 0
-  })
-
-  useEffect(() => {
-    const orderItem = orderList.find(item => item.dishId === dishId)
-    if (orderItem) {
-      setQty(orderItem.qty)
-    } else {
-      setQty(0)
-    }
-  }, [orderList, dishId])
+  const {cartList, addCartItem} = useContext(OrderContext)
+  const [qty, setQty] = useState(0)
 
   const distTypeImg =
     dishType === 1
       ? 'https://foodsafetyhelpline.com/wp-content/uploads/2013/05/non-veg-300x259.jpg'
       : 'https://www.pngkey.com/png/detail/261-2619381_chitr-veg-symbol-svg-veg-and-non-veg.png'
-  const onClickIncrease = () => {
-    onClickIncreaseOrderQty(dishId)
-  }
+  const inCartList = cartList.find(eachItem => eachItem.dishId === dishId)
 
-  const onClickDecrease = () => {
+  const onClickIncreaseQtyBtn = () => {
+    setQty(prev => prev + 1)
+  }
+  const onClickDecreaseQtyBtn = () => {
     if (qty > 0) {
       setQty(prev => prev - 1)
-      onClickDecreaseOrderQty(dishId)
     }
+  }
+  const onClickAddToCart = () => {
+    addCartItem({...foodDetails, qty})
   }
 
   const renderAddQtyContainer = () => {
@@ -53,7 +44,7 @@ const FoodList = props => {
           <button
             type="button"
             className="dish-qty-btn"
-            onClick={onClickDecrease}
+            onClick={onClickDecreaseQtyBtn}
           >
             -
           </button>
@@ -61,7 +52,7 @@ const FoodList = props => {
           <button
             type="button"
             className="dish-qty-btn"
-            onClick={onClickIncrease}
+            onClick={onClickIncreaseQtyBtn}
           >
             +
           </button>
@@ -84,6 +75,18 @@ const FoodList = props => {
           <p className="dish-price">{`${dishCurrency} ${dishPrice}`}</p>
           <p className="dish-description">{dishDescription}</p>
           {renderAddQtyContainer()}
+          {qty > 0 ? (
+            <button
+              type="button"
+              className="add-to-cart-btn"
+              onClick={onClickAddToCart}
+              disabled={inCartList}
+            >
+              ADD TO CART
+            </button>
+          ) : (
+            ''
+          )}
           {addonCat.length > 0 ? (
             <p className="dish-customization">Customizations available</p>
           ) : (

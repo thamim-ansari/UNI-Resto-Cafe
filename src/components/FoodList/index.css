@@ -144,3 +144,18 @@
     align-self: center;
   }
 }
+.add-to-cart-btn {
+  color: #299617;
+  background-color: transparent;
+  border: 1px solid #299617;
+  font-family: 'Roboto';
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+@media screen and (min-width: 768px) {
+  .add-to-cart-btn {
+    padding: 8px 16px;
+  }
+}

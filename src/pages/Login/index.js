@@ -4,26 +4,17 @@ import Cookies from 'js-cookie'
 import './index.css'
 
 const Login = props => {
-  const [loginPageStates, setLoginPageStates] = useState({
-    username: '',
-    password: '',
-    showSubmitError: false,
-    errorMsg: '',
-  })
-  const {username, password, showSubmitError, errorMsg} = loginPageStates
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [showSubmitError, setShowSubmitError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const onChangeUsername = event => {
-    setLoginPageStates(prev => ({
-      ...prev,
-      username: event.target.value,
-    }))
+    setUsername(event.target.value)
   }
 
   const onChangePassword = event => {
-    setLoginPageStates(prev => ({
-      ...prev,
-      password: event.target.value,
-    }))
+    setPassword(event.target.value)
   }
   const onSubmitSuccess = jwtToken => {
     const {history} = props
@@ -32,7 +23,8 @@ const Login = props => {
   }
 
   const onSubmitFailure = Msg => {
-    setLoginPageStates({errorMsg: Msg, showSubmitError: true})
+    setShowSubmitError(true)
+    setErrorMsg(Msg)
   }
 
   const submitForm = async event => {

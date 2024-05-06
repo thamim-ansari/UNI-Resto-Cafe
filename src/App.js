@@ -3,61 +3,87 @@ import {Switch, Route} from 'react-router-dom'
 
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Cart from './pages/Cart'
 import OrderContext from './context/OrderContext'
 import ProtectedRoute from './components/ProtectedRoute'
 
 import './App.css'
 
 const App = () => {
-  const [orderList, addOrderData] = useState([])
+  const [cartList, addCartListData] = useState([])
 
-  const onIncrementOrderItemQuantity = dish => {
-    const existingDishIndex = orderList.findIndex(
+  const onRemoveAllCartItems = () => {
+    addCartListData([])
+  }
+  const onRemoveCartItem = id => {
+    const updatedCartList = cartList.filter(
+      eachCartItem => eachCartItem.dishId !== id,
+    )
+    addCartListData(updatedCartList)
+  }
+
+  const onAddCartItem = dish => {
+    const existingCakeIndex = cartList.findIndex(
       item => item.dishId === dish.dishId,
     )
-    if (existingDishIndex !== -1) {
-      addOrderData(prev =>
+    if (existingCakeIndex !== -1) {
+      addCartListData(prev =>
         prev.map((item, index) => {
-          if (index === existingDishIndex) {
-            return {...item, qty: item.qty + 1}
+          if (index === existingCakeIndex) {
+            return {...item, qty: item.qty + dish.qty}
           }
           return item
         }),
       )
     } else {
-      addOrderData(prev => [...prev, {...dish, qty: 1}])
+      addCartListData(prev => [...prev, dish])
     }
   }
-  const onRemoveOrderItem = id => {
-    const filteredDish = orderList.filter(eachDish => eachDish.dishId !== id)
-    addOrderData(filteredDish)
-  }
-
-  const onDecrementOrderItemQuantity = dish => {
-    addOrderData(prev =>
-      prev.map(eachItem => {
-        if (eachItem.dishId === dish.dishId) {
-          if (eachItem.qty > 1) {
-            const updatedQuantity = eachItem.qty - 1
-            return {...eachItem, qty: updatedQuantity}
-          }
-          onRemoveOrderItem(dish.dishId)
+  const onIncreaseCartQty = id => {
+    addCartListData(prev =>
+      prev.map(eachCartItem => {
+        if (id === eachCartItem.dishId) {
+          const updatedQuantity = eachCartItem.qty + 1
+          return {...eachCartItem, qty: updatedQuantity}
         }
-        return eachItem
+        return eachCartItem
       }),
     )
   }
+  const onDecrementCartItemQuantity = id => {
+    const productObject = cartList.find(
+      eachCartItem => eachCartItem.dishId === id,
+    )
+    if (productObject.qty > 1) {
+      addCartListData(prev =>
+        prev.map(eachCartItem => {
+          if (id === eachCartItem.dishId) {
+            const updatedQuantity = eachCartItem.qty - 1
+            return {...eachCartItem, qty: updatedQuantity}
+          }
+          return eachCartItem
+        }),
+      )
+    } else {
+      onRemoveCartItem(id)
+    }
+  }
+
   return (
     <OrderContext.Provider
       value={{
-        orderList,
-        incrementOrderItemQuantity: onIncrementOrderItemQuantity,
-        decrementOrderItemQuantity: onDecrementOrderItemQuantity,
+        cartList,
+        addCartItem: onAddCartItem,
+        incrementCartItemQuantity: onIncreaseCartQty,
+        decrementCartItemQuantity: onDecrementCartItemQuantity,
+        removeCartItem: onRemoveCartItem,
+        removeAllCartItems: onRemoveAllCartItems,
       }}
     >
       <Switch>
         <Route exact path="/login" component={Login} />
         <ProtectedRoute exact path="/" component={Home} />
+        <ProtectedRoute exact path="/cart" component={Cart} />
       </Switch>
     </OrderContext.Provider>
   )
