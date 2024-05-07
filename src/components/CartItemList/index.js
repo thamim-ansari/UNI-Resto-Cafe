@@ -14,6 +14,7 @@ const CartItemList = props => {
   const onClickRemoveBtn = () => removeCartItem(dishId)
   const onClickIncreaseBtn = () => incrementCartItemQuantity(dishId)
   const onClickDecrementBtn = () => decrementCartItemQuantity(dishId)
+
   return (
     <li className="cart-list-item">
       <div className="cart-item-container">

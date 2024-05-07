@@ -32,7 +32,6 @@ const Cart = () => {
         alt="empty-cart-img"
         className="empty-cart-img"
       />
-      <p className="empty-cart-description">Your cart is Empty add something</p>
     </div>
   )
   return (
