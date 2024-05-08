@@ -65,11 +65,7 @@ const FoodList = props => {
   return (
     <li className="food-items">
       <div className="dish-type-and-details-container">
-        <img
-          src={distTypeImg}
-          alt="dist-type-img"
-          className="dish-type-image"
-        />
+        <img src={distTypeImg} alt={dishName} className="dish-type-image" />
         <div className="dish-details-container">
           <p className="dish-name">{dishName}</p>
           <p className="dish-price">{`${dishCurrency} ${dishPrice}`}</p>

@@ -37,11 +37,11 @@
   align-items: center;
 }
 .empty-cart-img {
-  width: 350px;
+  width: 300px;
 }
 @media screen and (min-width: 768px) {
   .empty-cart-img {
-    width: 550px;
+    width: 350px;
   }
 }
 .empty-cart-description {

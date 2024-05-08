@@ -19,7 +19,7 @@ const CartItemList = props => {
     <li className="cart-list-item">
       <div className="cart-item-container">
         <div>
-          <img src={dishImage} alt="cart-list-img" className="cart-item-img" />
+          <img src={dishImage} alt={dishName} className="cart-item-img" />
         </div>
         <div className="cart-qty-and-name-container">
           <p className="cart-item-name">{dishName}</p>
@@ -42,7 +42,7 @@ const CartItemList = props => {
           </div>
         </div>
       </div>
-      <p className="cart-item-price">{qty * dishPrice}</p>
+      <p className="cart-item-price">{`SAR ${qty * dishPrice}`}</p>
       <button
         type="button"
         className="cart-item-remove-btn"

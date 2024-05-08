@@ -28,7 +28,7 @@ const Cart = () => {
   const renderEmptyCartView = () => (
     <div className="empty-cart-container">
       <img
-        src="https://cdni.iconscout.com/illustration/premium/thumb/empty-cart-5521508-4610092.png"
+        src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-empty-cart-img.png"
         alt="empty-cart-img"
         className="empty-cart-img"
       />
