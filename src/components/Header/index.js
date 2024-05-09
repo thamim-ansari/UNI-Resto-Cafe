@@ -10,10 +10,8 @@ const Header = props => {
   const {history} = props
   const [restaurantName, setRestaurantName] = useState('')
   const {cartList} = useContext(OrderContext)
-  let totalQty = 0
-  cartList.forEach(eachItem => {
-    totalQty += eachItem.qty
-  })
+  const cartListQty = cartList.length
+
   const onClickLogout = () => {
     Cookies.remove('jwt_token')
     history.replace('/login')
@@ -46,7 +44,7 @@ const Header = props => {
               <span className="cart-icon-container">
                 <AiOutlineShoppingCart color="#555555" className="cart-icon" />
                 <span className="order-qty-container">
-                  <span className="order-qty">{totalQty}</span>
+                  <span className="order-qty">{cartListQty}</span>
                 </span>
               </span>
             </button>
