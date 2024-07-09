@@ -61,11 +61,10 @@ const Home = () => {
     const getItemsList = async () => {
       setApiStatus(apiStatusConstants.inProgress)
       const restaurantApiUrl =
-        'https://run.mocky.io/v3/77a7e71b-804a-4fbd-822c-3e365d3482cc'
+        'https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details'
       const restaurantApiResponse = await fetch(restaurantApiUrl)
       if (restaurantApiResponse.ok) {
         const fetchedRestaurantData = await restaurantApiResponse.json()
-
         const formattedRestaurantData = fetchedRestaurantData[0].table_menu_list.map(
           eachItem => getFormattedData(eachItem),
         )

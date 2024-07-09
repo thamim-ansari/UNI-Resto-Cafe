@@ -20,7 +20,7 @@ const Header = props => {
   useEffect(() => {
     const getRestaurantName = async () => {
       const restaurantApiUrl =
-        'https://run.mocky.io/v3/77a7e71b-804a-4fbd-822c-3e365d3482cc'
+        'https://apis2.ccbp.in/restaurant-app/restaurant-menu-list-details'
       const restaurantApiResponse = await fetch(restaurantApiUrl)
       const fetchedRestaurantData = await restaurantApiResponse.json()
       const resName = fetchedRestaurantData.map(
