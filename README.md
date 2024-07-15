@@ -33,5 +33,5 @@ Develop a restaurant page, ensuring it is user-friendly and visually appealing.
 
 #### Login Details:
 
-Username: rahul
-Password: rahul@2021
+**Username:** rahul  
+**Password:** rahul@2021
